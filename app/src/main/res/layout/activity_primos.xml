@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondonumeros"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D4F8F8"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="26dp"
+            android:text="Bienvenido al contador de Números Primos"
+            android:textColor="#2E3030"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="348dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.201">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:background="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="2dp">
+
+            <RelativeLayout
+                android:id="@+id/rela1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/textTitle2"
+                    android:layout_width="289dp"
+                    android:layout_height="39dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="28dp"
+                    android:text="Su número es: "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/idNumeroPrimo"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="0dp"
+                    android:gravity="center"
+                    android:text="69"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:padding="16dp"
+                tools:layout_editor_absoluteX="36dp"
+                tools:layout_editor_absoluteY="364dp">
+
+                <!-- TextView para el texto encima del botón Descender -->
+                <TextView
+                    android:id="@+id/textViewDescender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/buttonDescender"
+                    android:layout_alignEnd="@id/buttonDescender"
+
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Ascender/Descender"
+                    android:textSize="12dp" />
+
+                <!-- Botón Descender -->
+                <Button
+                    android:id="@+id/buttonDescender"
+                    android:layout_width="121dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewDescender"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:backgroundTint="@color/header"
+                    android:text="Descender" />
+
+                <!-- TextView para el texto encima del botón Pausar -->
+                <TextView
+                    android:id="@+id/textViewPausar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/buttonPausar"
+                    android:layout_alignEnd="@id/buttonPausar"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Pausar/Reiniciar"
+                    android:textSize="12dp" />
+
+                <!-- Botón Pausar -->
+                <Button
+                    android:id="@+id/buttonPausar"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewPausar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="@color/header"
+                    android:text="Pausar" />
+
+                <TextView
+                    android:id="@+id/textoOpcional"
+                    android:layout_width="306dp"
+                    android:layout_height="39dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginEnd="11dp"
+                    android:gravity="center"
+                    android:text="Actualmente el contador esta en pausa"
+                    android:textColor="#F44336"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextInput"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textoOpcional"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginRight="33dp"
+                    android:layout_toStartOf="@+id/buttonBuscarPrimo"
+                    android:hint="Orden del Primo"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/buttonBuscarPrimo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textoOpcional"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="@color/header"
+                    android:text="Buscar" />
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
