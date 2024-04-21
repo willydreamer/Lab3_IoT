@@ -131,6 +131,48 @@ public class PrimosActivity extends AppCompatActivity {
         });
 
 
+        //Boton buscar
+        binding.buttonBuscarPrimo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtener el texto ingresado en el EditText
+                String input = binding.editTextInput.getText().toString();
+
+                try {
+                    // Convertir el texto a un número entero
+                    int order = Integer.parseInt(input);
+
+                    // Verificar si el número está dentro del rango válido
+                    if (order < 1 || order > 999) {
+                        Toast.makeText(PrimosActivity.this, "Por favor ingrese un número entre 1 y 999", Toast.LENGTH_SHORT).show();
+                        return; // Salir del método si el número está fuera de rango
+                    }
+
+                    // Buscar el número primo correspondiente al orden ingresado
+                    NumeroPrimo numeroPrimo = null;
+                    for (NumeroPrimo primo : numerosPrimos) {
+                        if (primo.getOrder() == order) {
+                            numeroPrimo = primo;
+                            break;
+                        }
+                    }
+
+                    // Mostrar el número primo en el contador si se encontró
+                    if (numeroPrimo != null) {
+                        binding.idNumeroPrimo.setText(String.valueOf(numeroPrimo.getNumber()));
+                        currentIndex = numeroPrimo.getOrder() - 1;
+                    } else {
+                        Toast.makeText(PrimosActivity.this, "No se encontró un número primo para el orden ingresado", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (NumberFormatException e) {
+                    // Manejar el caso en que el texto ingresado no pueda ser convertido a un número
+                    Toast.makeText(PrimosActivity.this, "Por favor ingrese un número válido", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
 //        buttonDescender.setOnClickListener(new View.OnClickListener() {
 //            @Override
