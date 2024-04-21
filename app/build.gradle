@@ -42,4 +42,16 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    // Implementacion
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Implementaciones para Lifecicle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1'
+
+    // Workers
+    implementation "androidx.work:work-runtime:2.8.1"
 }

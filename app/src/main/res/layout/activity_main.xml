@@ -9,10 +9,11 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        tools:layout_editor_absoluteX="50dp"
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white2"
+        android:background="#9CE1EAED"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
@@ -136,8 +137,11 @@
                     android:id="@+id/imageView"
                     android:layout_width="306dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/fondocine">
-                </ImageView>
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/fondocine"></ImageView>
 
                 <EditText
                     android:id="@+id/editTextInput"
