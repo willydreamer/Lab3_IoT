@@ -6,19 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.lab3_20200403.Dto.Pelicula;
 import com.example.lab3_20200403.Dto.Rating;
 import com.example.lab3_20200403.Services.PeliculasApiService;
-import com.example.lab3_20200403.Services.PrimeNumbersApiService;
 import com.example.lab3_20200403.databinding.ActivityPeliculasBinding;
-import com.example.lab3_20200403.databinding.ActivityPrimosBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +24,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainPeliculas extends AppCompatActivity {
     private PeliculasApiService peliculasApiService;
     private ActivityPeliculasBinding binding;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String vistaActual = "Peliculas";
+        Toast.makeText(this, "Vista actual: " + vistaActual, Toast.LENGTH_SHORT).show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +57,10 @@ public class MainPeliculas extends AppCompatActivity {
         checkBoxConfirm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                buttonRegresar.setEnabled(isChecked);
-                buttonRegresar.setVisibility(View.VISIBLE);
+                buttonRegresar.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             }
         });
+
 
         buttonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,24 +98,25 @@ public class MainPeliculas extends AppCompatActivity {
                     binding.textGeneroContent.setText(pelicula.getGenre());
                     binding.textEscritoresContent.setText(pelicula.getWriter());
                     binding.textTramaContent.setText(pelicula.getPlot());
-//                    if (pelicula.getRatings() != null && !pelicula.getRatings().isEmpty()) {
-//                        for (Rating rating : pelicula.getRatings()) {
-//                            switch (rating.getSource()) {
-//                                case "Internet Movie Database":
-//                                    binding.textInternetContent.setText(rating.getValue());
-//                                    break;
-//                                case "Rotten Tomatoes":
-//                                    binding.textRottenTomatoesContent.setText(rating.getValue());
-//                                    break;
-//                                case "Metacritic":
-//                                    binding.textMetacriticContent.setText(rating.getValue());
-//                                    break;
-//                                default:
-//                                    // Otra fuente de rating desconocida
-//                                    break;
-//                            }
-//                        }
-//                    }
+
+                    if (pelicula.getRatings() != null && !pelicula.getRatings().isEmpty()) {
+                        for (Rating rating : pelicula.getRatings()) {
+                            switch (rating.getSource()) {
+                                case "Internet Movie Database":
+                                    binding.textInternetContent.setText(rating.getValue());
+                                    break;
+                                case "Rotten Tomatoes":
+                                    binding.textRottenTomatoesContent.setText(rating.getValue());
+                                    break;
+                                case "Metacritic":
+                                    binding.textMetacriticContent.setText(rating.getValue());
+                                    break;
+                                default:
+                                    // Otra fuente de rating desconocida
+                                    break;
+                            }
+                        }
+                    }
 
                 } else {
                     Log.e("Pelicula", "Error al recuperar datos");

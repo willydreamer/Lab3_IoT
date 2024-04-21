@@ -25,7 +25,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.lab3_20200403.Dto.NumeroPrimo;
 import com.example.lab3_20200403.Services.PrimeNumbersApiService;
 import com.example.lab3_20200403.ViewModel.ContadorViewModel;
-import com.example.lab3_20200403.databinding.ActivityMainBinding;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +41,13 @@ public class PrimosActivity extends AppCompatActivity {
     int contador = 1;
     private PrimeNumbersApiService primeNumbersApiService;
     private ActivityPrimosBinding binding;
+    //Toast de inicio:
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String vistaActual = "Números primos";
+        Toast.makeText(this, "Vista actual: " + vistaActual, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,9 @@ public class PrimosActivity extends AppCompatActivity {
         binding.buttonAscender.setVisibility(View.INVISIBLE);
         binding.buttonReiniciar.setVisibility(View.INVISIBLE);
         binding.textoOpcional.setVisibility(View.INVISIBLE);
+        boleto = 1; //(caso en boton descender activado)
+
+
         binding.buttonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +76,7 @@ public class PrimosActivity extends AppCompatActivity {
         buttonAscender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boleto = 2;
                 ascendente = true; // Establecer el modo como ascendente
                 buttonAscender.setVisibility(View.INVISIBLE); // Ocultar el botón de ascender
                 buttonDescender.setVisibility(View.VISIBLE); // Mostrar el botón de descender
@@ -89,6 +99,7 @@ public class PrimosActivity extends AppCompatActivity {
         buttonDescender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boleto = 1;
                 ascendente = false; // Establecer el modo como descendente
                 buttonAscender.setVisibility(View.VISIBLE); // Mostrar el botón de ascender
                 buttonDescender.setVisibility(View.INVISIBLE); // Ocultar el botón de descender
@@ -115,6 +126,8 @@ public class PrimosActivity extends AppCompatActivity {
                 binding.buttonPausar.setVisibility(View.INVISIBLE);
                 binding.buttonReiniciar.setVisibility(View.VISIBLE);
                 binding.textoOpcional.setVisibility(View.VISIBLE);
+                binding.buttonAscender.setVisibility(View.INVISIBLE);
+                binding.buttonDescender.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -126,6 +139,11 @@ public class PrimosActivity extends AppCompatActivity {
                 binding.buttonPausar.setVisibility(View.VISIBLE);
                 binding.buttonReiniciar.setVisibility(View.INVISIBLE);
                 binding.textoOpcional.setVisibility(View.INVISIBLE);
+                if(boleto == 1){
+                    binding.buttonDescender.setVisibility(View.VISIBLE);
+                } else if (boleto == 2) {
+                    binding.buttonAscender.setVisibility(View.VISIBLE);
+                }
                 showNextPrime();
             }
         });
@@ -173,20 +191,6 @@ public class PrimosActivity extends AppCompatActivity {
         });
 
 
-
-//        buttonDescender.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (ascendente) {
-//                    ascendente = false;
-//                    buttonAscender.setVisibility(View.VISIBLE);
-//                    buttonDescender.setVisibility(View.INVISIBLE);
-//                    currentIndex = numerosPrimos.size() - 1;
-//                    showNextPrime(99);
-//                }
-//            }
-//        });
-
     }
 
 
@@ -199,7 +203,7 @@ public class PrimosActivity extends AppCompatActivity {
                     .build()
                     .create(PrimeNumbersApiService.class);
         } else {
-            Toast.makeText(this, "No hay conexión a Internet", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "No hay conexión a Internet", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -224,6 +228,8 @@ public class PrimosActivity extends AppCompatActivity {
 
     private List<NumeroPrimo> numerosPrimos;
     private int currentIndex;
+    private int boleto = 0;
+
     private boolean ascendente;
 
     private void fetchAndDisplayPrime(ContadorViewModel viewModel) {
