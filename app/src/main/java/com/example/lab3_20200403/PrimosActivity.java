@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.lab3_20200403.Dto.NumeroPrimo;
 import com.example.lab3_20200403.Services.PrimeNumbersApiService;
 import com.example.lab3_20200403.ViewModel.ContadorViewModel;
-import com.example.lab3_20200403.databinding.ActivityPrimosBinding;
+import com.example.lab3_20200403.databinding.ActivityMainBinding;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,8 +48,6 @@ public class PrimosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPrimosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
         binding.buttonAscender.setVisibility(View.INVISIBLE);
         binding.buttonReiniciar.setVisibility(View.INVISIBLE);
         binding.textoOpcional.setVisibility(View.INVISIBLE);
@@ -69,10 +67,12 @@ public class PrimosActivity extends AppCompatActivity {
         buttonAscender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ascendente = true;
-                buttonAscender.setVisibility(View.INVISIBLE);
-                buttonDescender.setVisibility(View.VISIBLE);
+                ascendente = true; // Establecer el modo como ascendente
+                buttonAscender.setVisibility(View.INVISIBLE); // Ocultar el botón de ascender
+                buttonDescender.setVisibility(View.VISIBLE); // Mostrar el botón de descender
+                // Obtener el número actual
                 int numeroActual = Integer.parseInt(binding.idNumeroPrimo.getText().toString());
+                // Encontrar el orden del número actual
                 int ordenActual = 1;
                 for (NumeroPrimo numeroPrimo : numerosPrimos) {
                     if (numeroPrimo.getNumber() == numeroActual) {
@@ -80,20 +80,21 @@ public class PrimosActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                // Establecer el nuevo índice basado en el orden del número actual
                 currentIndex = ordenActual - 1;
-                showNextPrime();
+                showNextPrime(); // Mostrar los números primos en orden ascendente a partir del número actual
             }
         });
 
         buttonDescender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ascendente = false;
-                buttonAscender.setVisibility(View.VISIBLE);
-                buttonDescender.setVisibility(View.INVISIBLE);
-
+                ascendente = false; // Establecer el modo como descendente
+                buttonAscender.setVisibility(View.VISIBLE); // Mostrar el botón de ascender
+                buttonDescender.setVisibility(View.INVISIBLE); // Ocultar el botón de descender
+                // Obtener el número actual
                 int numeroActual = Integer.parseInt(binding.idNumeroPrimo.getText().toString());
-
+                // Encontrar el orden del número actual
                 int ordenActual = 1;
                 for (NumeroPrimo numeroPrimo : numerosPrimos) {
                     if (numeroPrimo.getNumber() == numeroActual) {
@@ -101,9 +102,9 @@ public class PrimosActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
+                // Establecer el nuevo índice basado en el orden del número actual
                 currentIndex = ordenActual - 1;
-                showNextPrime();
+                showNextPrime(); // Mostrar los números primos en orden descendente a partir del número actual
             }
         });
         // Botón de pausar
@@ -126,41 +127,6 @@ public class PrimosActivity extends AppCompatActivity {
                 binding.buttonReiniciar.setVisibility(View.INVISIBLE);
                 binding.textoOpcional.setVisibility(View.INVISIBLE);
                 showNextPrime();
-            }
-        });
-
-
-        //Boton buscar
-        binding.buttonBuscarPrimo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String input = binding.editTextInput.getText().toString();
-
-                try {
-
-                    int order = Integer.parseInt(input);
-
-                    // Verificar si el número está dentro del rango válido
-                    if (order < 1 || order > 999) {
-                        Toast.makeText(PrimosActivity.this, "Por favor ingrese un número entre 1 y 999", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    NumeroPrimo numeroPrimo = null;
-                    for (NumeroPrimo primo : numerosPrimos) {
-                        if (primo.getOrder() == order) {
-                            numeroPrimo = primo;
-                            break;
-                        }
-                    }
-                    if (numeroPrimo != null) {
-                        binding.idNumeroPrimo.setText(String.valueOf(numeroPrimo.getNumber()));
-                        currentIndex = numeroPrimo.getOrder() - 1;
-                    } else {
-                        Toast.makeText(PrimosActivity.this, "No se encontró un número primo para el orden ingresado", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (NumberFormatException e) {
-                    Toast.makeText(PrimosActivity.this, "Por favor ingrese un número válido", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -265,7 +231,7 @@ public class PrimosActivity extends AppCompatActivity {
                     }
                 }
             } else {
-                new Handler().postDelayed(this::showNextPrime, 223000);
+                new Handler().postDelayed(this::showNextPrime, 2000);
             }
         }
     }
